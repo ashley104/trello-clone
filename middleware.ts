@@ -5,10 +5,6 @@ import { clerkClient } from "@clerk/clerk-sdk-node";
 export default clerkMiddleware(async (auth, req) => {
   const isPublicRoute = createRouteMatcher(["/"]);
 
-  const isProtectedRoute = createRouteMatcher([
-    `/organization/${auth().orgId}`,
-  ]);
-
   if(auth().userId && isPublicRoute(req)) {
     let path = "";
 
@@ -27,7 +23,11 @@ export default clerkMiddleware(async (auth, req) => {
     return NextResponse.redirect(organisationPageUrl);
   }
 
-  if (!auth().userId && isProtectedRoute(req)) {
+  const isProtectedRoute = createRouteMatcher([
+    `/organization/${auth().orgId}(.*)`,
+  ]);
+
+  if (!auth().userId && !isPublicRoute(req)) {
     return auth().redirectToSignIn();
   }
 });
