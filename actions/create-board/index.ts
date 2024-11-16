@@ -5,9 +5,30 @@ import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { CreateBoard } from "./schema";
+import { auth } from "@clerk/nextjs/server";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-    const { title } = data;
+    const { title, image } = data;
+    const { orgId, userId } = auth();
+    if (!orgId || !userId) {
+        return {
+            error: "Unauthorised.",
+        };
+    }
+
+    const [
+        imageId,
+        imageThumbUrl,
+        imageFullUrl,
+        imageLinkHTML,
+        imageUserName
+    ] = image.split("|");
+
+    if (!imageId || !imageThumbUrl || !imageFullUrl || !imageLinkHTML || !imageUserName) {
+        return {
+            error: "Invalid image data.",
+        };
+    }
     
     let board;
 
@@ -15,6 +36,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         board = await db.board.create({
             data: {
                 title,
+                orgId,
+                imageId,
+                imageThumbUrl,
+                imageFullUrl,
+                imageLinkHTML,
+                imageUserName
             },
         });
     } catch (error) {
