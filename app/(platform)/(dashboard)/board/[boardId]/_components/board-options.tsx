@@ -31,11 +31,11 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent 
-        className="px-0 pt-3 pb-3" 
+        className="px-20 rounded pt-3 pb-3 bg-white" 
         side="bottom" 
         align="start"
       >
-        <div className="text-sm font-medium text-center text-neutral-600 pb-4">
+        <div className="text-sm font-medium text-center text-neutral-600 pb-4 bg-white">
           Board actions
         </div>
         <PopoverClose asChild>
@@ -50,7 +50,7 @@ export const BoardOptions = ({ id }: BoardOptionsProps) => {
           variant="ghost"
           onClick={onDelete}
           disabled={isLoading}
-          className="rouded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
+          className="rouded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm bg-white text-neutral-600"
         >
           Delete this board 
         </Button>

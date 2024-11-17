@@ -33,7 +33,7 @@ const BoardIdLayout = async ({
   params,
 }: {
   children: React.ReactNode;
-  params: { boardId: string };
+  params: { boardId: string; };
 }) => {
   const { orgId } = auth();
 
