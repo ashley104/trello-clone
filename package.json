@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.23",
     "@clerk/nextjs": "^5.2.2",
+    "@hello-pangea/dnd": "^17.0.0",
     "@prisma/client": "^5.17.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.1",

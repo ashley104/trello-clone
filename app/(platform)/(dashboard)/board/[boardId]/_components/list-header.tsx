@@ -4,7 +4,6 @@ import { updateList } from "@/actions/update-list";
 import { FormInput } from "@/components/form/form-input";
 import { useAction } from "@/hooks/use-action";
 import { List } from "@prisma/client";
-import { set } from "lodash";
 import { ElementRef, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";
@@ -54,11 +53,10 @@ export const ListHeader = ({
     const boardId = formData.get("boardId") as string;
 
     if (title === data.title) {
-      disableEditing();
-      return;
+      return disableEditing();
     }
 
-    execute({ id, boardId, title });
+    execute({ id, title, boardId });
   }
 
   const onBlur = () => {
@@ -81,8 +79,8 @@ export const ListHeader = ({
           action={handleSubmit}
           className="flex-1 px-[2px]"
         >
-          <input hidden id="id" value={data.id} />
-          <input hidden id="boardId" value={data.boardId} />
+          <input hidden id="id" name="id" value={data.id} />
+          <input hidden id="boardId" name="boardId" value={data.boardId} />
           <FormInput
             ref={inputRef}
             onBlur={onBlur}
