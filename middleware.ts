@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 import { clerkClient } from "@clerk/clerk-sdk-node";
 
 const isProtectedRoute = createRouteMatcher(['/organization(.*)'])
-const isPublicRoute = createRouteMatcher(['/'])
+const isPublicRoute = createRouteMatcher(['/', 'api/webhook'])
 
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) {
-    auth().protect();
-  }
+  // if (isProtectedRoute(req)) {
+  //   auth().protect();
+  // }
   if (auth().userId && isPublicRoute(req)) {
     let path = "/select-org";
 
