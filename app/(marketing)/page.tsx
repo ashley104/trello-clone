@@ -42,7 +42,7 @@ const MarketingPage = () => {
             </div>
             <Button className="mt-6 bg-blue-600 text-lg" size="lg" asChild>
                 <Link href="/sign-up">
-                Sign up - it's free!
+                Sign up - it’s free!
                 </Link>
             </Button>
         </div>
